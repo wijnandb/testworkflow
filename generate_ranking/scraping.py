@@ -15,11 +15,11 @@ from datetime import datetime
 results = process_files.read_csv_file('all_results.csv')
 
 # backup the existing results, use datetime
-today =  datetime.today()
-print(today)
-filename = 'backup/'+str(today)+".csv"
-print(filename)
-process_files.write_csv_file(filename, results)
+# today =  datetime.today()
+# print(today)
+# filename = 'backup/'+str(today)+".csv"
+# print(filename)
+# process_files.write_csv_file(filename, results)
 
 new_results = []
 
@@ -35,7 +35,7 @@ new_results = []
 def check_if_new_results():
     """
     We don't want the scraper to run if there are no new results. 
-    We visit CQranking, check teh latest result(s). 
+    We visit CQranking, check the latest result(s). 
     If we already have that result, we cancel.
     Otherwise, we scrape.
     We could/(should?) run the normal scraper once a day regardless?
