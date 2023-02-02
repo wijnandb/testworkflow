@@ -4,8 +4,8 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-22.04
+  scraping:
+    runs-on: ubuntu-latest
     permissions: write-all
 
     steps:
@@ -14,6 +14,20 @@ jobs:
         run: pip install requests bs4
       - name: run scraper
         run: python generate_ranking/scraping.py
+
+  processing:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: scraping
+      steps:
+        - name: process-points
+          run: python generate_ranking/processing.py
+
+  write_files:
+    runs-on: ubuntu-22.04
+    permissions: write-all
+    needs: [scraping, processing]
+    steps:
       - name: set user
         run: |
          git config --global user.email "wb@retta.nl"
