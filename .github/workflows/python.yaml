@@ -10,8 +10,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3.3.0
-      - name: create file
-        run: echo "action_state=yellow" >> test.txt
+      - name: install dependencies
+        run: pip install requests bs4
+      - name: run scraper
+        run: python generate_ranking/scraping.py
       - name: set user
         run: |
          git config --global user.email "wb@retta.nl"
