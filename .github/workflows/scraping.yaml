@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     needs: scraping
-      steps:
-        - name: process-points
-          run: python generate_ranking/processing.py
+    steps:
+      - name: process-points
+        run: python generate_ranking/processing.py
 
   write_files:
     runs-on: ubuntu-22.04
