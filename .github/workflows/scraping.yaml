@@ -14,20 +14,11 @@ jobs:
         run: pip install requests bs4
       - name: run scraper
         run: python generate_ranking/scraping.py
-
-  processing:
+        
+  write_results:
     runs-on: ubuntu-latest
     permissions: write-all
-    needs: scraping
-    steps:
-      - uses: actions/checkout@v3.3.0
-      - name: process-points
-        run: python generate_ranking/processing.py
-
-  write_files:
-    runs-on: ubuntu-latest
-    permissions: write-all
-    needs: [scraping, processing]
+    needs: [scraping]
     steps:
       - name: set user
         run: |
@@ -38,7 +29,36 @@ jobs:
       - name: stage changed files
         run: git add .
       - name: commit changed files
-        run: git commit -m "Auto updating, add file"
+        run: git commit -m "New results at $(date +'%Y-%m-%dT%H:%M:%S')"
+      - name: fetch from master
+        run: git fetch origin main
+      - name: push code to master
+        run: git push origin HEAD:main
+        
+  processing:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: scraping
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - name: process-points
+        run: python generate_ranking/processing.py
+
+  write_files_with_points:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: [scraping, write_results]
+    steps:
+      - name: set user
+        run: |
+         git config --global user.email "wb@retta.nl"
+         git config --global user.name "wijnandb"
+      - name: check for changes
+        run: git status
+      - name: stage changed files
+        run: git add .
+      - name: commit changed files
+        run: git commit -m "Points processed at $(date +'%Y-%m-%dT%H:%M:%S')"
       - name: fetch from master
         run: git fetch origin main
       - name: push code to master
