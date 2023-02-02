@@ -200,11 +200,3 @@ process_files.write_csv_file('all_results.csv', full_results)
 new_results.insert(0,['rank','category','racename','race_id','rider_name','rider_id','points','jpp'])
 process_files.write_csv_file('latest_results.csv', new_results)
 
-
-# with open('_data/all_results.csv', 'w') as f:
-#     write = csv.writer(f)
-#     write.writerows(full_results)
-
-# with open('_CSV/updated_results.csv', 'w') as f:
-#     write = csv.writer(f)
-#     write.writerows(unique_results)

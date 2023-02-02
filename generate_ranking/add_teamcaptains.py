@@ -43,7 +43,7 @@ def add_teamcaptain(infile, outfile=None):
                 # add the shortcode of the teamcaptain
                 result[-1]=(rider[3])
                 break
-    print(results)
+    # print(results)
 
     process_files.write_csv_file(infile, results)
 """
@@ -70,5 +70,3 @@ ploegen.csv
 8 - points
 9 - JPP
 """
-
-
