@@ -7,7 +7,7 @@ def read_csv_file(filename):
     Function to read CSV files, being called from (by) other functions
     WIP: Directory is hardcoded in function!!
     """
-    file = '/home/runner/work/testworkflow/testworkflow/_data/'+str(filename)
+    file = '_data/'+str(filename)
     with open(file, newline='') as f:
         readresults = csv.reader(f)
         csvlist = list(readresults)
@@ -19,7 +19,7 @@ def write_csv_file(filename, results):
     Function to write CSV files, being called from (by) other functions
     WIP: Directory is hardcoded in function!!
     """
-    file = '././_data/'+str(filename)
+    file = '_data/'+str(filename)
     with open(file, 'w', newline='') as f:
         write = csv.writer(f)
         write.writerows(results)
