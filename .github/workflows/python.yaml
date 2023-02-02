@@ -12,6 +12,10 @@ jobs:
       - uses: actions/checkout@v1
       - name: create file
         run: echo "action_state=yellow" >> test.txt
+      - name: set user
+        run: |
+         git config --global user.email "wb@retta.nl"
+         git config --global user.name "wijnandb"
       - name: check for changes
         run: git status
       - name: stage changed files
